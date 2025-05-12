@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
 class AddTaskScreen extends StatelessWidget {
-  const AddTaskScreen({super.key});
+  final Function addTaskCallback;
+  const AddTaskScreen({super.key, required this.addTaskCallback});
 
   @override
   Widget build(BuildContext context) {
+    String? newTaskTitle;
+
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 25),
       child: Column(
@@ -35,10 +38,15 @@ class AddTaskScreen extends StatelessWidget {
               hintText: "Enter your task here",
               hintStyle: TextStyle(color: Colors.black38),
             ),
+            onChanged: (newText) {
+              newTaskTitle = newText;
+            },
           ),
           SizedBox(height: 20),
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              addTaskCallback(newTaskTitle);
+            },
             style: ButtonStyle(
               backgroundColor: WidgetStateProperty.all(Colors.lightBlueAccent),
               shape: WidgetStateProperty.all(
